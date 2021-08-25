@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.text.TextUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
-/** created by  wjf  at 2021/8/24 14:42 */
 public class ToastUtil {
 
     public static void show(String msg) {
