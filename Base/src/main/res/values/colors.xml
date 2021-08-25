@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#0000</color>
+    <color name="transparent_scan">#3FFF</color>
+    /* color */
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#f44336</color>
+    <color name="pink">#E91E63</color>
+    <color name="purple">#9C27B0</color>
+    <color name="light_blue">#03A9F4</color>
+    <color name="teal">#009688</color>
+    <color name="green">#4CAF50</color>
+    <color name="orange">#FF9800</color>
+    /* gray */
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_1000">#191919</color>
+</resources>

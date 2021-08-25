@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    /*kotlin*/
+    api "androidx.core:core-ktx:1.6.0"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    /*rxjava+retrofit*/
+    api 'io.reactivex.rxjava2:rxjava:2.2.12' // 必要rxjava2依赖
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1' // 必要rxandroid依赖，切线程时需要用到
+    api 'com.squareup.retrofit2:retrofit:2.9.0' // 必要retrofit依赖
+    api 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0' // 必要依赖，解析json字符所用 转换器，请求结果转换成Model
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.9.0' // 必要依赖，和Rxjava结合必须用到，下面会提到
+    api 'com.squareup.okhttp3:logging-interceptor:4.9.1' //日志拦截器,非必要,如果需要打印OkHttpLog添加
+    /*util*/
+    api 'com.blankj:utilcodex:1.30.6'
+    /*BaseQuickAdapter*/
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
+    /*Gson*/
+    api 'com.google.code.gson:gson:2.8.7'
+    /*android 4.4以上沉浸式实现*/
+    /*基础依赖包，必须要依赖*/
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
+    /*fragment快速实现（可选）*/
+    api 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+    /*CircleImageview*/
+    api 'com.github.ai2101039:YLCircleImageView:v1.0.8'
+    /*glide*/
+    api 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    /*PopupWindow*/
+    api 'com.github.razerdp:BasePopup:2.2.1'
+    /*Zxing*/
+    api 'com.github.bingoogolapple.BGAQRCode-Android:zxing:1.3.8'
+    /*图片*/
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
+    /*角标*/
+    api 'com.github.NamelessPeople:RoundLabelTextView:1.1'
+}
