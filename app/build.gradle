@@ -36,6 +36,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
-//    implementation 'com.github.I494941:MVP:0.0.2'
-    implementation project(path: ':Base')
+    implementation 'com.github.I494941:MVP:0.0.3'
+//    implementation project(path: ':base')
 }
