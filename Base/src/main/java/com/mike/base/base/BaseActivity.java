@@ -2,7 +2,16 @@ package com.mike.base.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import com.blankj.utilcode.util.SPUtils;
+import com.mike.base.R;
+import com.mike.base.http.LoadingDialogFragment;
 import com.mike.base.http.RxApiManager;
 import com.mike.base.utils.ImmersionBarUtil;
 
@@ -10,9 +19,13 @@ import com.mike.base.utils.ImmersionBarUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-
+    protected SPUtils      sp            = SPUtils.getInstance();
     public    RxApiManager mRxApiManager = new RxApiManager();
 
+    private   Unbinder          mUnbinder;
+    protected Toolbar           mToolbar;
+    protected AppCompatTextView mTvLeft, mTvTitle, mTvRight;
+    private LoadingDialogFragment mLoadingDialogFragment;
 
     private boolean mIsImmersionBar = true;
 
@@ -31,13 +44,66 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        mUnbinder = ButterKnife.bind(this);
+        mToolbar = findViewById(R.id.toolbar);
+        mTvLeft = findViewById(R.id.tv_left);
+        mTvTitle = findViewById(R.id.tv_title);
+        mTvRight = findViewById(R.id.tv_right);
 
+        initToolbar();
+    }
 
+    public void initToolbar() {
+        if (mToolbar != null) {
+            mToolbar.setNavigationIcon(R.drawable.ic_back_white_24dp);
+            setSupportActionBar(mToolbar);
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayShowTitleEnabled(false);
+                actionBar.setDisplayHomeAsUpEnabled(isShowBack());
+            }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            back();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void back() {
+        finish();
+    }
+
+    public void showDialog() {
+        if (!(mLoadingDialogFragment != null && mLoadingDialogFragment.getDialog() != null
+                && mLoadingDialogFragment.getDialog().isShowing())) {
+            mLoadingDialogFragment = new LoadingDialogFragment.Builder().create();
+            mLoadingDialogFragment.showDialog(getSupportFragmentManager(), "");
+        }
+    }
+
+    public void dismissDialog() {
+        if (mLoadingDialogFragment != null && mLoadingDialogFragment.getDialog() != null
+                && mLoadingDialogFragment.getDialog().isShowing()) {
+            mLoadingDialogFragment.dismiss();
+        }
+    }
 
     @Override
     protected void onDestroy() {
         if (mRxApiManager != null) {
             mRxApiManager.clear();
+        }
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+            mUnbinder = null;
         }
         super.onDestroy();
     }

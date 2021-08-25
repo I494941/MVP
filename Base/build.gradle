@@ -1,10 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'com.jakewharton.butterknife'
 }
-
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.I494941 '
 
 android {
     compileSdkVersion 30
@@ -42,6 +40,9 @@ dependencies {
     /*kotlin*/
     api "androidx.core:core-ktx:1.6.0"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    /*butterknife*/
+    api 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
     /*rxjava+retrofit*/
     api 'io.reactivex.rxjava2:rxjava:2.2.12' // 必要rxjava2依赖
     api 'io.reactivex.rxjava2:rxandroid:2.1.1' // 必要rxandroid依赖，切线程时需要用到

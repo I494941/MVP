@@ -1,15 +1,20 @@
 package com.mike.mvp;
 
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.TextView;
+import butterknife.BindView;
+import com.mike.base.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.tv) TextView mTv;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_main;
+    }
 
-
+    @Override
+    protected void initViewAndData() {
+        mTv.setText("测试");
     }
 }

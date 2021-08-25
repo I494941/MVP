@@ -15,7 +15,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.mike.base.R;
@@ -35,11 +38,13 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public static final int SCREEN_TYPE_3 = 3;//3:宽:50%,高:WRAP_CONTENT,Gravity.CENTER
     public static final int SCREEN_TYPE_4 = 4;//3:宽:50%,高:MATCH_PARENT,Gravity.RIGHT,右
 
-    protected Toolbar mToolbar;
-    protected View    mStatusBarView;
-    protected View    mRootView;
-    protected Window  mWindow;
-    protected int     mScreenType;//0:默认全屏
+    private   Unbinder mUnbinder;
+    protected Toolbar  mToolbar;
+    protected View     mStatusBarView;
+    protected View     mRootView;
+    protected Window   mWindow;
+    protected SPUtils  sp;
+    protected int      mScreenType;//0:默认全屏
 
     private   boolean mIsFirst = true;
     private   boolean mIsDialogShowing;//dialog 状态
@@ -50,6 +55,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         //全屏
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialog);
+        sp = SPUtils.getInstance();
     }
 
     @Override
@@ -100,6 +106,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mUnbinder = ButterKnife.bind(this, view);
         if (isImmersionBarEnabled()) {
             initImmersionBar();
         }
@@ -116,6 +123,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
         } else {
             super.onDismiss(dialog);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        mUnbinder.unbind();
+        super.onDestroy();
     }
 
     /**
