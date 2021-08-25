@@ -2,8 +2,8 @@ package com.mike.base.utils;
 
 import android.app.Activity;
 import android.view.View;
-import com.bossay.base.R;
 import com.gyf.immersionbar.ImmersionBar;
+import com.mike.base.R;
 
 /**
  * created by  wjf  at 2020/3/24 17:22
