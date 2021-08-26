@@ -1,18 +1,23 @@
 package com.mike.base.base;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.mike.base.R;
 import com.mike.base.http.LoadingDialogFragment;
 import com.mike.base.http.RxApiManager;
+import com.mike.base.ui.ZXingActivity;
 import com.mike.base.utils.ImmersionBarUtil;
 
 /** created by  wjf  at 2021/7/31 11:25 */
@@ -162,18 +167,34 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * startActivityForResult
      */
-    protected void startActivityForResult(Class<?> clazz, int requestCode) {
-        startActivityForResult(clazz, requestCode, null);
+    protected void startActivityForResult(Class<?> clazz, ActivityResultLauncher launcher) {
+        startActivityForResult(clazz, launcher, null);
     }
 
     /**
      * startActivityForResult with bundle
      */
-    protected void startActivityForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+    protected void startActivityForResult(Class<?> clazz, ActivityResultLauncher launcher, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) {
             intent.putExtras(bundle);
         }
-        startActivityForResult(intent, requestCode);
+        launcher.launch(intent);
+    }
+
+    /**
+     * startActivityForResult ZXingActivity.class
+     */
+    protected void goScan(ActivityResultLauncher launcher) {
+        if (PermissionUtils.isGranted(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            startActivityForResult(ZXingActivity.class, launcher);
+        } else {
+            PermissionUtils.permissionGroup(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
+                    .callback((isAllGranted, granted, deniedForever, denied) -> {
+                        if (isAllGranted) {
+                            startActivityForResult(ZXingActivity.class, launcher);
+                        }
+                    }).request();
+        }
     }
 }

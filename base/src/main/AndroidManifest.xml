@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.mike.base"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mike.base">
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <application>
+        <activity
+            android:name=".ui.ZXingActivity"
+            android:theme="@style/AppTheme" />
+    </application>
+</manifest>

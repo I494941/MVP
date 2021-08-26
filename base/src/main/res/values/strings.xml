@@ -1,0 +1,7 @@
+<resources>
+    <string name="scan">扫一扫</string>
+    <string name="album">相册</string>
+    <string name="scan_hint">将二维码/条码放入框内,即可自动扫描</string>
+    <string name="click_to_turn_on_the_light">点击开灯</string>
+    <string name="click_to_turn_off_the_light">点击关灯</string>
+</resources>

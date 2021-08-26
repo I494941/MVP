@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <cn.bingoogolapple.qrcode.zxing.ZXingView
+        android:id="@+id/zxingview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:qrcv_animTime="1000"
+        app:qrcv_barCodeTipText="将条码放入框内,即可自动扫描"
+        app:qrcv_barcodeRectHeight="@dimen/dp_120"
+        app:qrcv_borderColor="@android:color/white"
+        app:qrcv_borderSize="@dimen/dp_1"
+        app:qrcv_cornerColor="@color/pink"
+        app:qrcv_cornerLength="@dimen/dp_20"
+        app:qrcv_cornerSize="@dimen/dp_5"
+        app:qrcv_customGridScanLineDrawable="@drawable/custom_grid_scan_line"
+        app:qrcv_isAutoZoom="true"
+        app:qrcv_isBarcode="false"
+        app:qrcv_isOnlyDecodeScanBoxArea="false"
+        app:qrcv_isShowDefaultGridScanLineDrawable="true"
+        app:qrcv_isShowDefaultScanLineDrawable="true"
+        app:qrcv_isShowLocationPoint="true"
+        app:qrcv_isShowTipBackground="true"
+        app:qrcv_isShowTipTextAsSingleLine="false"
+        app:qrcv_isTipTextBelowRect="false"
+        app:qrcv_maskColor="@color/transparent_scan"
+        app:qrcv_qrCodeTipText="@string/scan_hint"
+        app:qrcv_rectWidth="@dimen/dp_200"
+        app:qrcv_scanLineColor="@color/pink"
+        app:qrcv_toolbarHeight="@dimen/dp_60"
+        app:qrcv_topOffset="@dimen/dp_160"
+        app:qrcv_verticalBias="-1" />
+
+    <include layout="@layout/immersion_toolbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:drawableTop="@drawable/ic_lighting_on"
+        android:drawablePadding="@dimen/dp_5"
+        android:padding="@dimen/dp_10"
+        android:text="@string/click_to_turn_on_the_light"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+</RelativeLayout>
